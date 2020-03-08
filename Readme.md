@@ -5,6 +5,8 @@ REST API for converting MIDI files to MP3 audio files.
 
 Upload a JSON with base64 encoded Midi data and get a JSON including the base64 encoded Mp3 file. All details see below.
 
+This is a stateless microservice without volumes. The microservice runs forever and accepts http requests on the specified port. 
+
 # Setup and run
 
 You need to have installed:
