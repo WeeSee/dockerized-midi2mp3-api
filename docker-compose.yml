@@ -1,0 +1,9 @@
+version: "3.5"
+services:
+  app:
+    build: ./
+    volumes:
+      - ./lib:/var/www/lib:delegated
+      - ./public://var/www/public:delegated
+    ports:
+      - '8094:80'
