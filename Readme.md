@@ -16,7 +16,11 @@ Then you can build the image and start it up
 
 # Test
 
-Go inside container:
+You can test the microservice from outside the container:
+
+    curl -X POST -H "Content-Type: application/json" --data "@test.json" localhost:8094/convert | jq .
+
+Or make the test from inside the container:
 
     $ make bash
 
@@ -40,19 +44,22 @@ You should get a json output containing the base64 encoded mp3 file as
         "statusCode": "OK",
         "message": "",
         "base64Mp3Data": "...",
-    "logs": [
-        {
-            "title": "Midi->Mp3 conversion",
-            "content": "20200308-130050: start conversion\n20200308-130050: cmd = [timidity /tmp/converter-data/5e64ec82b1274/5e64ec82b1274.mid -Ow -o - | ffmpeg -i - -acodec libmp3lame -ab 64k /tmp/converter-data/5e64ec82b1274/output.mp3]\n"
-        }
-    ]
+        "logs": []
     }
 
+# Credits
 
+This repo was inspired by
 
-Or make a test from outside the container:
+* https://github.com/GGracieux/lilypond-api
+* https://github.com/mikechernev/midi2mp3-docker
 
-    curl -X POST -H "Content-Type: application/json" --data "@test.json" localhost:8094/convert | jq .
+# Author
+
+weesee@web.de
+
+(C) Copyright, 2020
+
 
 
 
