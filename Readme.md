@@ -23,11 +23,11 @@ docker run -p 8094:80 midi2mp3
 
 You can build the image and start it up with ```make``` and ```docker-compose```
 
-    $ make build up ps
+    make build up ps
 
 There are more commands in the Makefile, try
 
-    $ make
+    make
 
 ## API Usage
 
@@ -72,36 +72,46 @@ There are more commands in the Makefile, try
 # Test from command line
 
 Or make the test from inside the container:
-
-    $ make bash
+```bash
+    make bash
+```
 
 and build a request file:
-
-    # echo -n "{\"midiData\":\"" > /tmp/test.json
-    # cat /tmp/elton.mid | base64 --wrap=0 >> /tmp/test.json
-    # echo "\"}" >> /tmp/test.json
+```bash
+    echo -n "{\"midiData\":\"" > /tmp/test.json
+    cat /tmp/elton.mid | base64 --wrap=0 >> /tmp/test.json
+    echo "\"}" >> /tmp/test.json
+```
 
 or as a one liner:
-
-    # { echo -n "{\"midiData\":\""; echo -n "`base64 --wrap=0 /tmp/elton.mid`"; echo "\"}"; } > /tmp/test.json
+```bash
+    { echo -n "{\"midiData\":\""; echo -n "`base64 --wrap=0 /tmp/elton.mid`"; echo "\"}"; } > /tmp/test.json
+```
 
 then execute the conversion 
-
-    # curl -X POST -H "Content-Type: application/json" --data "@/tmp/test.json" localhost/convert | jq .
+```bash
+    curl -X POST -H "Content-Type: application/json" --data "@/tmp/test.json" localhost/convert | jq .
+```
 
 You should get a json output containing the base64 encoded mp3 file as
-
+```bash
     {
         "statusCode": "OK",
         "message": "",
         "base64Mp3Data": ".......",
         "logs": []
     }
+```
 
 You can test the microservice from outside the container (this is more complicated since you need the tools installed in your os):
-
+```bash
     curl -X POST -H "Content-Type: application/json" --data "@test.json" localhost:8094/convert | jq .
+```
 
+To extract the mp3 file out of the result on the command line, use
+```bash
+    curl -X POST -H "Content-Type: application/json" --data "@/tmp/test.json" localhost/convert | jq -r .base64Mp3Data | base64 -d > /tmp/elton.mp3
+```
 
 # Credits
 

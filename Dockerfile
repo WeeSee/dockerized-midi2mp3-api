@@ -37,3 +37,4 @@ ENV UID 33
 
 # Do we need a test file?
 #RUN wget -O /tmp/elton.mid http://en.midimelody.ru/midi.php?str=%2Fe%2FElton%20John%2FElton%20John%20-%20Song%20for%20a%20Guy.mid
+COPY elton.mid /tmp
