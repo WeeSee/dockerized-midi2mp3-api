@@ -25,10 +25,15 @@ down: ## stop containers
 	docker-compose down
 
 bash: ## open bash in app container
-	docker-compose exec app bash
+	docker-compose exec midi2mp3-api bash
 	
 logs: ## show container logs and follow untail ^c
 	docker-compose logs -f -t
     
 ps: ## see what's running
 	docker-compose ps
+
+push: ## push repo do Dockerhub
+	docker login \
+	&& docker-compose push midi2mp3-api \
+	&& docker logout

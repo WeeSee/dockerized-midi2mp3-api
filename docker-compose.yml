@@ -1,7 +1,7 @@
 version: "3.5"
 services:
-  app:
-    image: midi2mp3-api:1.0
+  midi2mp3-api:
+    image: weesee/midi2mp3-api:1.0
     build: ./
     volumes:
       - ./lib:/var/www/lib:delegated
