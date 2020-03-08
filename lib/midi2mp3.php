@@ -35,10 +35,17 @@ class Midi2Mp3
 
         try {
             $this->initPath();
-            file_put_contents($this->inputFile,$midiData);
+            // Check base64 encoding
+            // see here: https://stackoverflow.com/a/34982057/3286903
+            if (!preg_match('%^[a-zA-Z0-9/+]*={0,2}$%', $midiData)) {
+                throw new \Error("wrong midi format (no base64 encoded midi)");
+            }
+            file_put_contents($this->inputFile,base64_decode($midiData));
 
             // converter execution
             // $cmd  = "lilypond -o $this->dir $this->inputFile >> $this->logFile 2>&1";
+            $cmd = "timidity $1 -Ow -o - ".
+                "| ffmpeg -i - -acodec libmp3lame -ab 64k output.mp3";
             $cmd  = "cp ".
                 $this->inputFile." ".
                 $this->dir."/output.mp3 ".

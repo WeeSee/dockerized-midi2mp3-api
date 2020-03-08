@@ -11,7 +11,11 @@ RUN ls -l /app
 FROM 1and1internet/ubuntu-16-apache-php-7.0
 
 # Converter basics...
-RUN apt-get update && apt-get install -y timidity ffmpeg
+RUN apt-get update && apt-get install -y \
+        timidity \
+        ffmpeg \
+        jq \
+    && rm -rf /var/lib/apt/lists/*
 
 # Apache configuration for PHP-Slim-Usage
 COPY apache.conf /etc/apache2/sites-available/000-default.conf
@@ -35,4 +39,4 @@ ENV UID 33
 #RUN echo "<?php define('LILYPOND_VERSION',\"$(lilypond -v | sed -n 1p)\"); ?>" >> /var/www/lib/const.php
 #RUN chmod 777 /var/www/lib/const.php
 
-RUN wget -O /tmp/x.mid http://en.midimelody.ru/midi.php?str=%2Fe%2FElton%20John%2FElton%20John%20-%20Song%20for%20a%20Guy.mid
+RUN wget -O /tmp/elton.mid http://en.midimelody.ru/midi.php?str=%2Fe%2FElton%20John%2FElton%20John%20-%20Song%20for%20a%20Guy.mid
