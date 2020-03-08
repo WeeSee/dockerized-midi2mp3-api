@@ -1,7 +1,9 @@
 Midi2Mp3
 ========
 
-REST API for converting MIDI files to MP3 audio files
+REST API for converting MIDI files to MP3 audio files.
+
+Upload a JSON with base64 encoded Midi data and get a JSON including the base64 encoded Mp3 file. All details see below.
 
 # Setup and run
 
