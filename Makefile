@@ -8,9 +8,9 @@
 help:
 	@echo "# Build-Tool"
 	@echo "# (C) weesee@web.de, 2020"
-	@echo Befehle: make ...
+	@echo Invocation: make [command]
+	@echo Commands:
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
-	@echo "eingestellt ist: $(DOCKER_COMPOSE_YML)"
 
 .DEFAULT_GOAL := help
 
