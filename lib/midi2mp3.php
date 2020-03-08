@@ -3,6 +3,7 @@
 class Midi2Mp3 
 {
     const TMP_DIR = '/tmp/converter-data';
+    const DEBUG = 0;
     private $id;
     private $dir;
     private $inputFile;
@@ -43,13 +44,13 @@ class Midi2Mp3
             file_put_contents($this->inputFile,base64_decode($midiData));
 
             // converter execution
-            // $cmd  = "lilypond -o $this->dir $this->inputFile >> $this->logFile 2>&1";
-            $cmd = "timidity $1 -Ow -o - ".
-                "| ffmpeg -i - -acodec libmp3lame -ab 64k output.mp3";
-            $cmd  = "cp ".
-                $this->inputFile." ".
-                $this->dir."/output.mp3 ".
-                ">> ".$this->logFile." 2>&1";
+            $cmd = "timidity ".$this->inputFile." -Ow -o - ".
+                "| ffmpeg -i - -acodec libmp3lame -ab 64k ".
+                $this->dir."/output.mp3";
+            // $cmd  = "cp ".
+            //     $this->inputFile." ".
+            //     $this->dir."/output.mp3 ".
+            //     ">> ".$this->logFile." 2>&1";
 
             $this->log("cmd = [$cmd]");
             exec($cmd,$op,$retVal);
@@ -114,10 +115,12 @@ class Midi2Mp3
 
     protected function log($message)
     {
-        file_put_contents(
-            $this->logFile,date("Ymd-His").": ".$message."\n",
-            FILE_APPEND
-        );
+        if (self::DEBUG) {
+            file_put_contents(
+                $this->logFile,date("Ymd-His").": ".$message."\n",
+                FILE_APPEND
+            );
+        }
     }
 
 }
