@@ -17,7 +17,7 @@ You need to have installed:
 
 ## Running the container
 
-Run the container using the prebuild image from Dockerhub:
+Run the container using [the prebuild image from Dockerhub](https://hub.docker.com/r/weesee/midi2mp3-api):
 
 ```bash
 docker run -p 8094:80 midi2mp3
