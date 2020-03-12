@@ -3,7 +3,7 @@ Midi2Mp3
 
 ![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/weesee/midi2mp3-api) ![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/weesee/midi2mp3-api) ![Docker Pulls](https://img.shields.io/docker/pulls/weesee/midi2mp3-api) ![GitHub issues](https://img.shields.io/github/issues/weesee/dockerized-midi2mp3-api) 
 
-REST API for converting MIDI files to MP3 audio files.
+REST API for converting MIDI files to MP3 audio files - Provided as Docker container for easy usage.
 
 Upload a JSON with base64 encoded Midi data and get a JSON including the base64 encoded Mp3 file. All details see below.
 
