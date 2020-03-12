@@ -1,6 +1,8 @@
 Midi2Mp3
 ========
 
+![Docker Build Status](https://img.shields.io/docker/build/weesee/midi2mp3-api)
+
 REST API for converting MIDI files to MP3 audio files.
 
 Upload a JSON with base64 encoded Midi data and get a JSON including the base64 encoded Mp3 file. All details see below.
